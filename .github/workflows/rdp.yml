@@ -1,7 +1,7 @@
 
 name: Windows and Tailscale Test
 
-on:
+'on':
   workflow_dispatch:
 
 jobs:
@@ -10,8 +10,9 @@ jobs:
 
     steps:
       - name: Check Windows Runner
+        shell: pwsh
         run: |
-          echo "Windows runner started successfully"
+          Write-Host "Windows runner started successfully"
           systeminfo
 
       - name: Connect to Tailscale
@@ -24,7 +25,5 @@ jobs:
         run: |
           Write-Host "Tailscale Status:"
           tailscale status
-
           Write-Host "Tailscale IP:"
           tailscale ip -4
-
