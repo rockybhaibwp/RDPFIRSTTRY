@@ -1,1 +1,30 @@
 
+name: Windows and Tailscale Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check Windows Runner
+        run: |
+          echo "Windows runner started successfully"
+          systeminfo
+
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTH_KEY }}
+
+      - name: Verify Tailscale
+        shell: pwsh
+        run: |
+          Write-Host "Tailscale Status:"
+          tailscale status
+
+          Write-Host "Tailscale IP:"
+          tailscale ip -4
+
